@@ -8,9 +8,11 @@
 <table>
     <thead>
     <tr>
-       <th>ID</th>
+        <th>ID</th>
         <th>Name</th>
+        <th>Link</th>
     </tr>
+
     <tr th:each="current : ${persons}">
         <td th:text="${current.getId()}"></td>
 
@@ -20,11 +22,25 @@
                 <p>Show</p>
             </a>
         </td>
-
-
-    </tr>
+        <td>
+            <form th:action="@{'/person/delete/' + ${current.id}}" method="post">
+                <input type="hidden" name="_method" value="delete" />
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+        <td>
+            <a th:href="@{'/person/update/' + ${current.id}}">
+                <p>Update</p>
+            </a>
+        </td>
     </tr>
     </thead>
 </table>
+<a th:href="@{/person/new}">
+    <p>New Person</p>
+</a>
+<a th:href="@{/person/most-expense}">
+    <p>Most Expenses Person</p>
+</a>
 </body>
 </html>

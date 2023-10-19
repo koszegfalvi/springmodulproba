@@ -1,5 +1,7 @@
 package hu.progmatic.springmodulproba.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,8 +21,8 @@ public class Person {
     private  String birthPlace;
     private Date birthDate;
     private String email;
-@OneToMany(mappedBy = "owner")
-
+@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+@JsonManagedReference
     private Set<Expense> expenses;
 public  boolean addExpense(Expense expense){
     return expenses.add(expense);
